@@ -8,7 +8,7 @@ echo <<<_INIT
         <meta charset='utf-8'>
         <meta name='viewport' content='width=device-width, initial-scale=1'> 
         <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
-        <link rel='stylesheet' href='styles.css' type='text/css'>
+        <link rel='stylesheet' href='./css/styles.css' type='text/css'>
         <script src='javascript.js'></script>
         <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
         <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
@@ -31,17 +31,15 @@ echo <<<_MAIN
         <title>$userstr</title>
     </head>
     <body>
-        <div data-role='page'>
-            <div data-role='header' data-inline='true'>
+        <div data-role="page">
+            <div data-role='header'>
             
 _MAIN;
 
     if ($loggedin){
 echo <<<_LOGGEDIN
                 <a href="#nav-panel" data-icon="bars">Меню</a>
-                <div class='center' >$team / $table | $userstr</div>
-                <a data-role='button' data-inline='true' data-icon='action'
-                    data-transition="fade" href='logout.php'>Завершить сессию</a>
+                <h1 class='center' id='location'>$team / $table | $userstr</h1>
             </div> <!-- header -->
             <div data-role='content'>
                 

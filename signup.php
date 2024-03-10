@@ -46,6 +46,7 @@ _END;
             else {
                 $pass_hash = password_hash($pass, PASSWORD_DEFAULT);
                 queryMysql("INSERT INTO users (name, pass) VALUES('$user', '$pass_hash')");
+                $_SESSION['user'] = $user;
                 echo <<<_REDIRECT
                     <script>
                         setTimeout(function(){location.href="./index.php"} , 0);
