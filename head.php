@@ -45,7 +45,7 @@ _LOGGEDIN;
 echo <<<_GUEST
                 <div class='center'>
                     <a data-role='button' data-inline='true' data-icon='home'
-                        data-transition='slide' href='index.php'>Гланвая страница</a>
+                        data-transition='slide' href='index.php'>Главная страница</a>
                     <a data-role='button' data-inline='true' data-icon='plus'
                         data-transition='slide' href='signup.php'>Зарегистрироваться</a>
                     <a data-role='button' data-inline='true' data-icon='user'

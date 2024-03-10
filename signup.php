@@ -46,7 +46,7 @@ _END;
             else {
                 $pass_hash = password_hash($pass, PASSWORD_DEFAULT);
                 queryMysql("INSERT INTO users (name, pass) VALUES('$user', '$pass_hash')");
-                
+                //Переход
             }
         }
     }
