@@ -1,4 +1,4 @@
-<?php // Example 27-2: header.php
+<?php 
   session_start();
 
 echo <<<_INIT
@@ -17,6 +17,8 @@ _INIT;
     require_once 'functions.php';
 
     $userstr = "Вы вошли как: гость";
+    $team = "Команда";
+    $table = "Таблица";
 
     if(isset($_SESSION['user'])){
         $user  = $_SESSION['user'];
@@ -30,14 +32,18 @@ echo <<<_MAIN
     </head>
     <body>
         <div data-role='page'>
-            <div data-role='header'>
-                <div class='userstr'>$userstr</div>
-            </div>
-            <div data-role='content'>
+            <div data-role='header' data-inline='true'>
+            
 _MAIN;
 
     if ($loggedin){
 echo <<<_LOGGEDIN
+                <a href="#nav-panel" data-icon="bars">Меню</a>
+                <div class='center' >$team / $table | $userstr</div>
+                <a data-role='button' data-inline='true' data-icon='action'
+                    data-transition="fade" href='logout.php'>Завершить сессию</a>
+            </div> <!-- header -->
+            <div data-role='content'>
                 
 _LOGGEDIN;
     }
@@ -51,6 +57,8 @@ echo <<<_GUEST
                     <a data-role='button' data-inline='true' data-icon='user'
                         data-transition='slide' href='login.php'>Войти</a>
                 </div>
+            </div> <!-- header -->
+            <div data-role='content'>
 _GUEST;
     }
 ?>

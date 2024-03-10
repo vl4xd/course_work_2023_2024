@@ -1,5 +1,5 @@
 <?php
-    require_once 'head.php';
+    require_once 'header.php';
 
     $error = $user = $pass = "";
 
@@ -20,7 +20,11 @@
 
                 if (password_verify($pass, $row['pass'])){
                     $_SESSION['user'] = $user;
-                    //Переход
+                    echo <<<_REDIRECT
+                        <script>
+                            setTimeout(function(){location.href="./index.php"} , 0);
+                        </script>
+                    _REDIRECT;
                 }
                 else{
                     $error = "Неверная попытка входа";

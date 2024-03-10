@@ -1,5 +1,5 @@
 <?php
-    require_once 'head.php';
+    require_once 'header.php';
 
 echo <<<_END
                 <script>
@@ -46,7 +46,11 @@ _END;
             else {
                 $pass_hash = password_hash($pass, PASSWORD_DEFAULT);
                 queryMysql("INSERT INTO users (name, pass) VALUES('$user', '$pass_hash')");
-                //Переход
+                echo <<<_REDIRECT
+                    <script>
+                        setTimeout(function(){location.href="./index.php"} , 0);
+                    </script>
+                _REDIRECT;
             }
         }
     }
