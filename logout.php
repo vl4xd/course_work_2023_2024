@@ -5,11 +5,7 @@
     {
     destroySession();
     }
-    echo <<<_REDIRECT
-        <script>
-            setTimeout(function(){location.href="./index.php"} , 0);
-        </script>
-    _REDIRECT;
+    redirectToTime("./index.php", 0);
 ?>
     </div>
   </body>

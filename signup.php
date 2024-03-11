@@ -4,6 +4,7 @@
 echo <<<_END
                 <script>
                     function checkUser(user){
+                        
                         if (user.value == ''){
                             $('#used').html('&nbsp;')
                             return
@@ -20,8 +21,8 @@ echo <<<_END
 
                         $.post
                         (
-                            'lowercaseuser.php',
-                            {user: user.value},
+                            'lowercasetext.php',
+                            {text: user.value},
                             function(data){
                                 $('#user').val(data)
                             }

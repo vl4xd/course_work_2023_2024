@@ -8,11 +8,12 @@
 
 
 echo <<< _TEAMS
-<h4 class='center' data-inline='true'>Команды:<h4>
-<a data-role='button' data-inline='true' data-icon='home'
-    data-transition='slide' href='joinTeam.php'>Присоединиться</a>
-<a data-role='button' data-inline='true' data-icon='plus'
-    data-transition='slide' href='createTeam.php'>Создать</a>
+<div>
+    <a data-role='button' data-inline='true' data-icon='home'
+        data-transition='slide' href='joinTeam.php'>Присоединиться</a>
+    <a data-role='button' data-inline='true' data-icon='plus'
+        data-transition='slide' href='createTeam.php'>Создать</a>
+</div>
 <ul id='teams' data-role="listview" data-filter="true" data-filter-placeholder="Название команды" data-inset="true">
 _TEAMS;
 
