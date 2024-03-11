@@ -20,11 +20,7 @@
 
                 if (password_verify($pass, $row['pass'])){
                     $_SESSION['user'] = $user;
-                    echo <<<_REDIRECT
-                        <script>
-                            setTimeout(function(){location.href="./index.php"} , 0);
-                        </script>
-                    _REDIRECT;
+                    redirectToTime('./teams.php', 0);
                 }
                 else{
                     $error = "Неверная попытка входа";
@@ -53,9 +49,7 @@ echo <<<_END
                         <input data-transition='slide' type='submit' value='Войти'>
                     </div>
                 </form>
-            </div>
-        </div>
-    </body>
-</html>
 _END;
+
+    require_once 'footer.php';
 ?>

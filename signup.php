@@ -47,11 +47,7 @@ _END;
                 $pass_hash = password_hash($pass, PASSWORD_DEFAULT);
                 queryMysql("INSERT INTO users (name, pass) VALUES('$user', '$pass_hash')");
                 $_SESSION['user'] = $user;
-                echo <<<_REDIRECT
-                    <script>
-                        setTimeout(function(){location.href="./index.php"} , 0);
-                    </script>
-                _REDIRECT;
+                redirectToTime('./teams.php', 0);
             }
         }
     }
@@ -77,9 +73,7 @@ echo <<<_END
                         <input data-transition='slide' type='submit' value='Зарегистрироваться'>
                     </div>
                 </form>
-            </div>
-        </div>
-    </body>
-</html>
 _END;
+
+    require_once 'footer.php';
 ?>

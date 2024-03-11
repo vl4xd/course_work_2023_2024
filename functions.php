@@ -40,4 +40,13 @@
         $var = stripslashes($var);
         return $connection->real_escape_string($var);
     }
+
+    function redirectToTime($page, $time){
+        
+        echo <<<_REDIRECT
+                    <script>
+                        setTimeout(function(){location.href="$page"} , $time);
+                    </script>
+                _REDIRECT;
+    }
 ?>
