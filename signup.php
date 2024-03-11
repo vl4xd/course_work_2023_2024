@@ -45,7 +45,8 @@ _END;
             if ($result->num_rows) $error = 'Данное имя уже занято<br><br>';
             else {
                 $pass_hash = password_hash($pass, PASSWORD_DEFAULT);
-                queryMysql("INSERT INTO users (name, pass) VALUES('$user', '$pass_hash')");
+                $last_id = queryMysql("INSERT INTO users (name, pass) VALUES('$user', '$pass_hash')");
+                $_SESSION['user_id'] = $last_id;
                 $_SESSION['user'] = $user;
                 redirectToTime('./teams.php', 0);
             }

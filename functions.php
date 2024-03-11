@@ -18,6 +18,10 @@
         global $connection;
         $result = $connection->query($query);
         if (!$result) die("Fatal Error");
+        if (strpos($query, 'INSERT') === 0){
+            $last_id = $connection->insert_id;
+            return $last_id;
+        }
         return $result;
     }
 

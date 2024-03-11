@@ -9,7 +9,7 @@
 
         if ($user == "" || $pass == "") $error = 'Не все поля заполнены<br><br>';
         else{
-            $result = queryMysql("SELECT name, pass FROM users WHERE name='$user'");
+            $result = queryMysql("SELECT * FROM users WHERE name='$user'");
 
             if ($result->num_rows == 0){
                 $error = "Неверная попытка входа";
@@ -19,6 +19,7 @@
                 $result->close();
 
                 if (password_verify($pass, $row['pass'])){
+                    $_SESSION['user_id'] = $row['id'];
                     $_SESSION['user'] = $user;
                     redirectToTime('./teams.php', 0);
                 }
