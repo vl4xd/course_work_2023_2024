@@ -25,7 +25,7 @@ _TEAMS;
 
     for ($i = 0; $i < $num; $i++){
         $row = $result->fetch_array(MYSQLI_BOTH);
-        $hrefTeam = "./teamInfo.php?team_id=" . $row['team_id'];
+        $hrefTeam = "./teamTables.php?team_id=" . $row['team_id'];
         $nameTeam = $row['team_name'];
         echo "<li><a data-transition='slide' href='$hrefTeam'>$nameTeam</a></li>";
     }

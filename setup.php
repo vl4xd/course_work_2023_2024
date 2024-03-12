@@ -96,6 +96,12 @@
                 ON UPDATE CASCADE');
 
 
+  foreach($GLOBALS['types'] as $type_key => $type_value){
+    $result = queryMysql("SELECT * FROM types WHERE name = '$type_key'");
+    if ($result->num_rows) continue;
+    queryMysql("INSERT INTO types (name) VALUES ('$type_key')");
+  }
+
 ?>
 
     <br>...done.
