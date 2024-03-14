@@ -33,7 +33,7 @@ _TABLES;
             $row = $result->fetch_array(MYSQLI_BOTH);
             $hrefTable = "./tableView.php?table_id=" . $row['id'];
             $nameTable = $row['name'];
-            echo "<li><a data-transition='slide' href='$hrehrefTablefTeam'>$nameTable</a></li>";
+            echo "<li><a data-transition='slide' href='$hrefTable'>$nameTable</a></li>";
         }
         $result->close();
     

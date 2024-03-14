@@ -54,14 +54,14 @@
                 _REDIRECT;
     }
 
-    $GLOBALS['types'] = [
-                            "text_data" => "Однострочная запись",
-                            "textarea_data" => "Многострочная запись",
-                            "int_data" => "Целое число",
-                            "float_data" => "Десятичное число",
-                            "date_data" => "Дата",
-                            "file_data" => "Файл",
-                            "bool_data" => "Флаг (Да / Нет)",
-                            "table_data" => "Таблица",
-                        ];
+    $types = [
+        "text_data" => "Однострочная запись",
+        "textarea_data" => "Многострочная запись",
+        "int_data" => "Целое число",
+        "float_data" => "Десятичное число",
+        "date_data" => "Дата",
+        "file_data" => "Файл",
+        "bool_data" => "Флаг (Да / Нет)",
+        "table_data" => "Таблица",
+    ];
 ?>

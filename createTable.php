@@ -13,7 +13,6 @@
     $user_id = $_SESSION['user_id'];
     $team_id = sanitizeString($_GET['team_id']);
     $team_public = false;
-    $jsonTypes = json_encode($GLOBALS['types']); // передача массива с типами в js
 
     if(isset($_POST['table_name'])){
         $table_name = sanitizeString($_POST['table_name']);
@@ -52,6 +51,27 @@ _END;
 echo<<<_END
     <script>
         var columnsCounter = $('.columns').children().length;
+        
+        function fillSelectTypes(select){
+            $.post
+            (
+                'createselecttypes.php',
+                function(data){
+                    select.append(data);
+                }
+            )
+        }
+        
+        function fillSelectTables(select){
+            var team_id = '$team_id';
+            $.post(
+                'createselecttables.php',
+                {team_id: team_id},
+                function(data){
+                    select.append(data);
+                }
+            )
+        }
 
         function deleteColumn(column_id){
             $('[class^="' + column_id + '"]').remove();
@@ -59,14 +79,49 @@ echo<<<_END
 
         function addColumn() {
             var n = 'column_id_' + columnsCounter;
+            var s = 'select_type_id_' + columnsCounter;
+            var g = 'select_table_id_' + columnsCounter;
 
-            var newDiv = $('<div class="' + n + '" data-role="fieldcontain"></div>');
+            var newDiv = $('<div class="' + n + '" data-role="fieldcontain" data-type="horizontal"></div>');
+            var newLabel = $('<label>Столбец ' + columnsCounter + '</label>');
             var newInput = $('<input id="' + n + '" name="' + n + '" type="text" data-inline="true">');
-            var newButton = $('<a data-inline="true" class="ui-btn ui-icon-delete ui-btn-icon-notext ui-corner-all"></a>');
+            var newButton = $('<a data-inline="true" data-role="button" data-icon="">Удалить столбец</a>');
+
+            var newSelectTypes = $('<select id="' + s + '" name="' + s + '" data-inline="true"></select>');
+            var optionDefault = $('<option>Выберите тип данных</option>');
+            newSelectTypes.append(optionDefault);
+            fillSelectTypes(newSelectTypes);
+            
+
             newButton.attr('onClick', 'deleteColumn(\'' + n + '\')');
+            newDiv.append(newLabel);
             newDiv.append(newInput);
             newDiv.append(newButton);
+            newDiv.append(newSelectTypes);
             $('.columns').append(newDiv).enhanceWithin();
+
+
+            var newSelectTables = $('<select id="' + s + '" name="' + s + '" data-inline="true"></select>');
+            var optionDefault = $('<option>Выберите вспомогательную таблицу</option>');
+            newSelectTables.append(optionDefault);
+            fillSelectTables(newSelectTables);
+            
+            $(function() {
+                newSelectTypes.change(function(){
+                    var selectedValue = $(this).val();
+                    if (selectedValue === "table_data"){
+                        newDiv.append(newSelectTables);
+                        $('.columns').enhanceWithin();
+                    }
+                    else {
+                        if (newSelectTables) {
+                            newSelectTables.remove();
+                        }
+                    }
+                })
+            })
+
+            
 
             newButton.on('click', function() {
                 deleteColumn(n);
