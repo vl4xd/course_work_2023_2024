@@ -41,6 +41,8 @@
                         VALUES ('$column_name', $column_type_id, $last_table_id)");
             }
         }
+
+        redirectToTime('./teamTables.php?team_id=' . $team_id, 0);
     }
 
 echo <<<_END
