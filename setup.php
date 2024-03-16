@@ -95,6 +95,65 @@
                 ON DELETE CASCADE
                 ON UPDATE CASCADE');
 
+  createTable('text_data',
+              'item_id BIGINT UNSIGNED,
+              data VARCHAR(64),
+              FOREIGN KEY (item_id) REFERENCES items (id)
+                ON DELETE CASCADE
+                ON UPDATE CASCADE');
+
+  createTable('textarea_data',
+              'item_id BIGINT UNSIGNED,
+              data TEXT,
+              FOREIGN KEY (item_id) REFERENCES items (id)
+                ON DELETE CASCADE
+                ON UPDATE CASCADE');
+
+  createTable('int_data',
+              'item_id BIGINT UNSIGNED,
+              data INT,
+              FOREIGN KEY (item_id) REFERENCES items (id)
+                ON DELETE CASCADE
+                ON UPDATE CASCADE');
+
+  createTable('float_data',
+              'item_id BIGINT UNSIGNED,
+              data FLOAT,
+              FOREIGN KEY (item_id) REFERENCES items (id)
+                ON DELETE CASCADE
+                ON UPDATE CASCADE');
+
+  createTable('date_data',
+              'item_id BIGINT UNSIGNED,
+              data DATETIME,
+              FOREIGN KEY (item_id) REFERENCES items (id)
+                ON DELETE CASCADE
+                ON UPDATE CASCADE');
+
+  createTable('file_data',
+              'item_id BIGINT UNSIGNED,
+              data VARCHAR(255),
+              FOREIGN KEY (item_id) REFERENCES items (id)
+                ON DELETE CASCADE
+                ON UPDATE CASCADE');
+
+  createTable('bool_data',
+              'item_id BIGINT UNSIGNED,
+              data BOOLEAN,
+              FOREIGN KEY (item_id) REFERENCES items (id)
+                ON DELETE CASCADE
+                ON UPDATE CASCADE');
+
+  createTable('table_data',
+              'item_id BIGINT UNSIGNED,
+              data BIGINT UNSIGNED,
+              FOREIGN KEY (item_id) REFERENCES items (id)
+                ON DELETE CASCADE
+                ON UPDATE CASCADE,
+              FOREIGN KEY (note_id) REFERENCES notes (id)
+                ON DELETE CASCADE
+                ON UPDATE CASCADE');
+
 
   foreach($types as $type_key => $type_value){
     $result = queryMysql("SELECT * FROM types WHERE name = '$type_key'");

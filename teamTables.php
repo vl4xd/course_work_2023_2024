@@ -21,7 +21,7 @@
 echo <<< _TABLES
     <div>
         <a data-role='button' data-inline='true' data-icon='plus'
-            data-transition='slide' href="./createTable.php?team_id=$team_id">Создать</a>
+            data-transition='slide' href="./createTable.php?team_id=$team_id">Создать таблицу</a>
     </div>
     <ul id='teams' data-role="listview" data-filter="true" data-filter-placeholder="Имя таблицы" data-inset="true">
 _TABLES;
