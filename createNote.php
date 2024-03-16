@@ -11,6 +11,23 @@
 
     $error = "";
     $table_id = sanitizeString($_GET['table_id']);
+    $user_id = $_SESSION['user_id'];
+
+    if (isset($_POST['columns'])){
+        $current_datetime = date('Y-m-d H:i:s');
+        $last_note_id = queryMysql("INSERT INTO notes (date, table_id, user_id)
+                                    VALUES ('$current_datetime', '$table_id', '$user_id')");
+
+        $columns = $_POST['columns'];
+        foreach ($columns as $column_id => $value) {
+            foreach ($value as $type => $data) {
+                $last_item_id = queryMysql("INSERT INTO items (column_id, note_id)
+                                            VALUES ('$column_id', '$last_note_id')");
+                queryMysql("INSERT INTO " . $type . " (item_id, data)
+                            VALUES ('$last_item_id', '$data')");
+            }
+        }
+    }
 
 echo<<<_FORM_START
 <form id='myForm' method='post' action='./createNote.php?table_id=$table_id'>$error
@@ -110,11 +127,7 @@ for ($i = 0; $i < $num_columns; $i++){
             echo<<<_END
                 <div data-role='fieldcontain'>
                     <label>$name</label>
-                    <form>
-                        <input data-type="search" id="searchForSelect">
-                    </form>
-                    <label></label>
-                    <select id="anotherSelect" name="$input_name" data-filter="true" data-input="#searchForSelect">
+                    <select id="anotherSelect" name="$input_name">
             _END;
 
             $current_value = $next_value = 0;
@@ -125,20 +138,20 @@ for ($i = 0; $i < $num_columns; $i++){
                 if ($j == 0) {
                     $current_value = $row_notes['note_id'];
                 }
-                
-                $result_item = queryMysql('SELECT * FROM ' . $row_notes['type'] . 'WHERE item_id =' . $row_notes['item_id']);
+
+                $result_item = queryMysql('SELECT * FROM ' . $row_notes['type'] . ' WHERE item_id =' . $row_notes['item_id']);
                 $row_item = $result_item->fetch_array(MYSQLI_BOTH);
 
                 $next_value = $row_notes['note_id'];
                 if ($current_value == $next_value){
-                    $key .= $row_item['data'];
+                    $key .= $row_item['data'] . " ";
                     
                 }
                 else{
                     echo '<option value="' . $current_value . '">' . $key . '</option>';
                     $current_value = $next_value;
                     $key = "";
-                    $key .= $row_item['data'];
+                    $key .= $row_item['data'] . " ";
                 }
             }
             echo '<option value="' . $current_value . '">' . $key . '</option>';
@@ -147,13 +160,14 @@ for ($i = 0; $i < $num_columns; $i++){
                     </select>
                 </div>
             _END;
-            
+
+            $result_notes->close();
+            $result_item->close();
+
             break;
     }
 }
 $result_columns->close();
-$result_notes->close();
-$result_item->close();
 
 echo<<<_FORM_END
 <div data-role='fieldcontain'>
