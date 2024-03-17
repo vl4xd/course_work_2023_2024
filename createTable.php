@@ -31,7 +31,7 @@
             $type_id = $result_type->fetch_array(MYSQLI_BOTH);
             $column_type_id = $type_id['id'];
 
-            if (isset($columns[$i]['table'])) {
+            if (isset($columns[$i]['table'])) {  
                 $column_table_id = $columns[$i]['table'];
                 queryMysql("INSERT INTO columns (name, type_id, table_id, table_data_id)
                         VALUES ('$column_name', $column_type_id, $last_table_id, $column_table_id)");
