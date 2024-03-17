@@ -27,6 +27,8 @@
                             VALUES ('$last_item_id', '$data')");
             }
         }
+
+        redirectToTime('./tableView.php?table_id=' . $table_id, 0);
     }
 
 echo<<<_FORM_START
@@ -78,7 +80,7 @@ for ($i = 0; $i < $num_columns; $i++){
             echo<<<_END
                 <div data-role='fieldcontain'>
                     <label>$name</label>
-                    <input id='table_name' type='number' pattern="^-?\d+(\.\d{1,2})?$" name='$input_name' value=''>
+                    <input id='table_name' type='number' step='any' pattern="^[+-]?\d+(\.\d{1,2})?$" name='$input_name' value=''>
                     <label></label>
                 </div>
             _END;

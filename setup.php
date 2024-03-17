@@ -111,7 +111,7 @@
 
   createTable('int_data',
               'item_id BIGINT UNSIGNED,
-              data INT,
+              data BIGINT,
               FOREIGN KEY (item_id) REFERENCES items (id)
                 ON DELETE CASCADE
                 ON UPDATE CASCADE');

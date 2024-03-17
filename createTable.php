@@ -23,6 +23,8 @@
                                     VALUES ('$table_name', '$table_info', 0, '$current_datetime', '$team_id', '$user_id')");
 
         $columns = $_POST['columns'];
+
+        /*
         for ($i = 0; $i < count($columns); $i++){
             $column_name = $columns[$i]['name'];
             $column_type = $columns[$i]['type'];
@@ -35,6 +37,36 @@
                 $column_table_id = $columns[$i]['table'];
                 queryMysql("INSERT INTO columns (name, type_id, table_id, table_data_id)
                         VALUES ('$column_name', $column_type_id, $last_table_id, $column_table_id)");
+            }
+            else{
+                queryMysql("INSERT INTO columns (name, type_id, table_id)
+                        VALUES ('$column_name', $column_type_id, $last_table_id)");
+            }
+        }
+        */
+
+        foreach ($columns as $column_id => $value) {
+            $column_name = $column_type = $table_data_id = "";
+            foreach ($value as $type => $data) {
+                switch ($type){
+                    case 'name':
+                        $column_name = $data;
+                        break;
+                    case 'type':
+                        $column_type = $data;
+                        break;
+                    case 'table':
+                        $table_data_id = $data;
+                        break;
+                }
+            }
+            $result_type = queryMysql("SELECT * FROM types WHERE name='$column_type'");
+            $type_id = $result_type->fetch_array(MYSQLI_BOTH);
+            $column_type_id = $type_id['id'];
+
+            if ($table_data_id != "") {
+                queryMysql("INSERT INTO columns (name, type_id, table_id, table_data_id)
+                        VALUES ('$column_name', $column_type_id, $last_table_id, $table_data_id)");
             }
             else{
                 queryMysql("INSERT INTO columns (name, type_id, table_id)
